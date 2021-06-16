@@ -2,6 +2,10 @@
 
 中华人民共和国行政区划代码
 
+# 导包地址
+
+github.com/xiaoqidun/zxzqh
+
 # 数据库（自动生成）
 
 - generate/node_list.json
