@@ -33,11 +33,11 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	parentM := make(map[int][]Node)
+	nodePMap := make(map[int][]Node)
 	for i := 0; i < len(nodeList); i++ {
-		parentM[nodeList[i].Parent] = append(parentM[nodeList[i].Parent], nodeList[i])
+		nodePMap[nodeList[i].Parent] = append(nodePMap[nodeList[i].Parent], nodeList[i])
 	}
-	nodeTree = generateNodeTree(parentM, 0)
+	nodeTree = generateNodeTree(nodePMap, 0)
 }
 
 // NodeList 获取中华人民共和国行政区划代码扁平列表
