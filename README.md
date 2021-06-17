@@ -15,3 +15,4 @@ github.com/xiaoqidun/zxzqh
 
 - NodeList 获取中华人民共和国行政区划代码扁平列表
 - NodeTree 获取中华人民共和国行政区划代码树状列表
+- CodeNode 通过中华人民共和国行政区划代码查找节点

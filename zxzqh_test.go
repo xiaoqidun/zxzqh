@@ -33,3 +33,7 @@ func TestNodeTree(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCodeNode(t *testing.T) {
+	t.Log(CodeNode(110000))
+}

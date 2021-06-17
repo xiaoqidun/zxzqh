@@ -12,9 +12,10 @@ import (
 var data []byte
 
 var (
-	err      error
-	nodeList []Node
-	nodeTree Tree
+	err         error
+	nodeList    []Node
+	nodeTree    Tree
+	codeNodeMap = make(map[int]Node)
 )
 
 type Node struct {
@@ -36,6 +37,7 @@ func init() {
 	nodePMap := make(map[int][]Node)
 	for i := 0; i < len(nodeList); i++ {
 		nodePMap[nodeList[i].Parent] = append(nodePMap[nodeList[i].Parent], nodeList[i])
+		codeNodeMap[nodeList[i].Code] = nodeList[i]
 	}
 	nodeTree = generateNodeTree(nodePMap, 0)
 }
@@ -48,6 +50,11 @@ func NodeList() []Node {
 // NodeTree 获取中华人民共和国行政区划代码树状列表
 func NodeTree() Tree {
 	return nodeTree
+}
+
+// CodeNode 通过中华人民共和国行政区划代码查找节点
+func CodeNode(code int) Node {
+	return codeNodeMap[code]
 }
 
 func generateNodeList(html []byte) (nodes []Node, err error) {
