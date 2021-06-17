@@ -53,8 +53,12 @@ func NodeTree() Tree {
 }
 
 // CodeNode 通过中华人民共和国行政区划代码查找节点
-func CodeNode(code int) Node {
-	return codeNodeMap[code]
+func CodeNode(code int) *Node {
+	v, ok := codeNodeMap[code]
+	if !ok {
+		return nil
+	}
+	return &v
 }
 
 func generateNodeList(html []byte) (nodes []Node, err error) {
