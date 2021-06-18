@@ -14,7 +14,7 @@ var data []byte
 var (
 	err         error
 	nodeList    []Node
-	nodeTree    Tree
+	nodeTree    []Tree
 	codeNodeMap = make(map[int]Node)
 )
 
@@ -48,7 +48,7 @@ func NodeList() []Node {
 }
 
 // NodeTree 获取中华人民共和国行政区划代码树状列表
-func NodeTree() Tree {
+func NodeTree() []Tree {
 	return nodeTree
 }
 
@@ -115,15 +115,8 @@ func generateNodeList(html []byte) (nodes []Node, err error) {
 	return
 }
 
-func generateNodeTree(data map[int][]Node, root int) Tree {
-	tree := Tree{
-		Node: Node{
-			Code:   0,
-			Parent: 0,
-			Name:   "根节点",
-		},
-		Children: nil,
-	}
+func generateNodeTree(data map[int][]Node, root int) []Tree {
+	var tree []Tree
 	if v, ok := data[root]; ok {
 		for i := 0; i < len(v); i++ {
 			item := Tree{
@@ -131,9 +124,9 @@ func generateNodeTree(data map[int][]Node, root int) Tree {
 				Children: nil,
 			}
 			if _, ok2 := data[v[i].Code]; ok2 {
-				item.Children = append(item.Children, generateNodeTree(data, v[i].Code).Children...)
+				item.Children = append(item.Children, generateNodeTree(data, v[i].Code)...)
 			}
-			tree.Children = append(tree.Children, item)
+			tree = append(tree, item)
 		}
 	}
 	return tree
