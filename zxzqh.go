@@ -3,12 +3,13 @@ package zxzqh
 import (
 	"bytes"
 	_ "embed"
+	"errors"
 	"github.com/PuerkitoBio/goquery"
 	"strconv"
 	"strings"
 )
 
-//go:embed assets/20201201.html
+//go:embed assets/202201.html
 var data []byte
 
 var (
@@ -66,11 +67,20 @@ func generateNodeList(html []byte) (nodes []Node, err error) {
 	if err != nil {
 		return
 	}
+	sel1, sel2 := "", ""
+	if bytes.Index(html, []byte("xl7228320")) != -1 {
+		sel1, sel2 = ".xl7228320", ".xl7328320"
+	} else if bytes.Index(html, []byte("")) != -1 {
+		sel1, sel2 = ".xl7032365", ".xl7132365"
+	} else {
+		err = errors.New("parse format error")
+		return
+	}
 	top, parent := 0, 0
 	doc.Find(`tr[height$="19"]`).Each(func(i int, selection *goquery.Selection) {
 		id := 0
 		name := ""
-		selection.Find(".xl7228320").Each(func(i int, selection *goquery.Selection) {
+		selection.Find(sel1).Each(func(i int, selection *goquery.Selection) {
 			switch i {
 			case 0:
 				id, _ = strconv.Atoi(selection.Text())
@@ -96,7 +106,7 @@ func generateNodeList(html []byte) (nodes []Node, err error) {
 			}
 			return
 		}
-		selection.Find(".xl7328320").Each(func(i int, selection *goquery.Selection) {
+		selection.Find(sel2).Each(func(i int, selection *goquery.Selection) {
 			switch i {
 			case 0:
 				id, _ = strconv.Atoi(selection.Text())

@@ -2,7 +2,7 @@ package zxzqh
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"testing"
 )
 
@@ -17,7 +17,7 @@ func TestNodeList(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = ioutil.WriteFile(nodeListFile, b, 0600)
+	err = os.WriteFile(nodeListFile, b, 0600)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -28,7 +28,7 @@ func TestNodeTree(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = ioutil.WriteFile(nodeTreeFile, b, 0600)
+	err = os.WriteFile(nodeTreeFile, b, 0600)
 	if err != nil {
 		t.Fatal(err)
 	}
