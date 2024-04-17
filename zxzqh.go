@@ -70,7 +70,7 @@ func generateNodeList(html []byte) (nodes []Node, err error) {
 	sel1, sel2 := "", ""
 	if bytes.Index(html, []byte("xl7228320")) != -1 {
 		sel1, sel2 = ".xl7228320", ".xl7328320"
-	} else if bytes.Index(html, []byte("")) != -1 {
+	} else if bytes.Index(html, []byte("xl7032365")) != -1 {
 		sel1, sel2 = ".xl7032365", ".xl7132365"
 	} else {
 		err = errors.New("parse format error")
